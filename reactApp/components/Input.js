@@ -8,8 +8,8 @@ class Input extends React.Component {
   render() {
     return (
       <form onSubmit={(e) => this.props.handleSubmit(e)}>
-        <input type="text" placeholder="New Item" value={this.props.text} onChange={(e) => this.props.handleTyping(e)}/>
-        <input type="submit" value="Create Todo Item" />
+        <input type="text" className="text" placeholder="New Item" value={this.props.text} onChange={(e) => this.props.handleTyping(e)}/>
+        <input type="submit" className="btn-small btn-primary" value="Create Todo Item" />
       </form>
     )
   }

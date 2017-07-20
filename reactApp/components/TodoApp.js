@@ -19,7 +19,6 @@ class App extends React.Component {
   componentDidMount() {
     axios.get(dbUrl)
       .then((todoItems) => {
-        console.log('todoItems passed in', todoItems.data, typeof todoItems.data)
         this.setState({items: todoItems.data});
       })
   }
@@ -71,16 +70,17 @@ class App extends React.Component {
         var newItems = this.state.items.slice()
         newItems[index] = updatedItem
         this.setState({items: newItems})
-
       }
     })
   }
   render() {
     return (
-      <div>
-        <h2>Your List of Shit to Get Done</h2>
-        <Input items={this.state.items} text={this.state.text} handleTyping={this.handleTyping.bind(this)} handleSubmit={this.handleSubmit.bind(this)}/>
-        <List items={this.state.items} handleRemove={this.handleRemove.bind(this)} handleCompletion={this.handleCompletion.bind(this)}/>
+      <div className="outerContainer">
+        <div className="container">
+          <h2 className="title">Your List of Shit to Get Done</h2>
+          <Input items={this.state.items} text={this.state.text} handleTyping={this.handleTyping.bind(this)} handleSubmit={this.handleSubmit.bind(this)}/>
+          <List items={this.state.items} handleRemove={this.handleRemove.bind(this)} handleCompletion={this.handleCompletion.bind(this)}/>
+        </div>
       </div>
     )
   }

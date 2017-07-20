@@ -8,7 +8,7 @@ class List extends React.Component {
   }
   render() {
     return (
-      <ul>
+      <ul className="list">
         {this.props.items.map(item => {
           return <ListItem
             key={item._id}

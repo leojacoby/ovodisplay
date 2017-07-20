@@ -10581,14 +10581,18 @@ var App = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        null,
+        { className: 'outerContainer' },
         _react2.default.createElement(
-          'h2',
-          null,
-          'Your List of Shit to Get Done'
-        ),
-        _react2.default.createElement(_Input2.default, { items: this.state.items, text: this.state.text, handleTyping: this.handleTyping.bind(this), handleSubmit: this.handleSubmit.bind(this) }),
-        _react2.default.createElement(_List2.default, { items: this.state.items, handleRemove: this.handleRemove.bind(this), handleCompletion: this.handleCompletion.bind(this) })
+          'div',
+          { className: 'container' },
+          _react2.default.createElement(
+            'h2',
+            { className: 'title' },
+            'Your List of Shit to Get Done'
+          ),
+          _react2.default.createElement(_Input2.default, { items: this.state.items, text: this.state.text, handleTyping: this.handleTyping.bind(this), handleSubmit: this.handleSubmit.bind(this) }),
+          _react2.default.createElement(_List2.default, { items: this.state.items, handleRemove: this.handleRemove.bind(this), handleCompletion: this.handleCompletion.bind(this) })
+        )
       );
     }
   }]);
@@ -11516,10 +11520,10 @@ var Input = function (_React$Component) {
         { onSubmit: function onSubmit(e) {
             return _this2.props.handleSubmit(e);
           } },
-        _react2.default.createElement('input', { type: 'text', placeholder: 'New Item', value: this.props.text, onChange: function onChange(e) {
+        _react2.default.createElement('input', { type: 'text', className: 'text', placeholder: 'New Item', value: this.props.text, onChange: function onChange(e) {
             return _this2.props.handleTyping(e);
           } }),
-        _react2.default.createElement('input', { type: 'submit', value: 'Create Todo Item' })
+        _react2.default.createElement('input', { type: 'submit', className: 'btn-small btn-primary', value: 'Create Todo Item' })
       );
     }
   }]);
@@ -11578,7 +11582,7 @@ var List = function (_React$Component) {
 
       return _react2.default.createElement(
         'ul',
-        null,
+        { className: 'list' },
         this.props.items.map(function (item) {
           return _react2.default.createElement(_ListItem2.default, {
             key: item._id,
@@ -11643,17 +11647,17 @@ var ListItem = function (_React$Component) {
 
       return _react2.default.createElement(
         'li',
-        null,
+        { className: 'listItem' },
         _react2.default.createElement(
           'button',
-          { style: { marginRight: "1em" }, _id: this.props._id, onClick: function onClick(e) {
+          { style: { marginRight: "1em" }, className: 'btn btn-danger', id: this.props._id, onClick: function onClick(e) {
               return _this2.props.handleRemove(_this2.props._id);
             } },
           'X'
         ),
         _react2.default.createElement(
           'button',
-          { style: { marginRight: "1em" }, _id: this.props._id, onClick: function onClick(e) {
+          { style: { marginRight: "1em" }, className: 'btn btn-success', id: this.props._id, onClick: function onClick(e) {
               return _this2.props.handleCompletion(_this2.props._id);
             } },
           '\u2713'

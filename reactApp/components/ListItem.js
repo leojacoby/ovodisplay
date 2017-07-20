@@ -7,9 +7,9 @@ class ListItem extends React.Component {
   }
   render() {
     return (
-      <li>
-        <button style={{ marginRight: "1em" }} _id={this.props._id} onClick={(e) => this.props.handleRemove(this.props._id)}>X</button>
-        <button style={{ marginRight: "1em" }} _id={this.props._id} onClick={(e) => this.props.handleCompletion(this.props._id)}>✓</button>
+      <li className="listItem">
+        <button style={{ marginRight: "1em" }} className="btn btn-danger" id={this.props._id} onClick={(e) => this.props.handleRemove(this.props._id)}>X</button>
+        <button style={{ marginRight: "1em" }} className="btn btn-success" id={this.props._id} onClick={(e) => this.props.handleCompletion(this.props._id)}>✓</button>
         {this.props.completed ? <strike>{this.props.item}</strike> : this.props.item}
       </li>
     )

@@ -18,7 +18,6 @@ router.get('/', (req, res) => {
 })
 
 router.post('/add', (req, res) => {
-  console.log("in post route")
   const {text, completed, _id} = req.body.todoItem
   new TodoItem({
     _id: _id,
@@ -26,7 +25,6 @@ router.post('/add', (req, res) => {
     completed: completed
   }).save()
     .then(response => {
-      console.log("success adding to db")
       res.send(response)
     })
     .catch(error => {
