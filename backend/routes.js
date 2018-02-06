@@ -46,7 +46,11 @@ router.get('/', (req, res) => {
           newPlayer.slg = player.tb / player.ab;
           newPlayer.soRate = player.so / player.pa;
           newPlayer.bbRate = player.bb / player.pa;
-          newPlayer.sbPct = player.sb / (player.sb + player.cs);
+          if ((player.sb + player.cs) === 0) {
+            newPlayer.sbPct = 0.0;
+          } else {
+            newPlayer.sbPct = player.sb / (player.sb + player.cs);
+          }
           newPlayer.ba = player.h / player.ab;
           newPlayer.hrRate = player.hr / player.pa;
           playersArr[index] = newPlayer;
