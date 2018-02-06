@@ -1,19 +1,21 @@
 const path = require('path');
 const express = require('express');
+const routes = require('./backend/routes');
+const bodyParser = require('body-parser');
 const app = express();
-const PORT = process.env.PORT || 3000;
-const api = require('./backend/routes');
 
+console.log('get served!');
+
+// This line makes the build folder publicly available.
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (request, response) => {
     response.sendFile(__dirname + '/public/index.html'); // For React/Redux
 });
 
-app.use('/api', api);
+app.use(bodyParser.json());
+app.use('/db', routes);
 
-app.listen(PORT, error => {
-    error
-    ? console.error(error)
-    : console.info(`==> 🌎 Listening on port ${PORT}. Visit http://localhost:${PORT}/ in your browser.`);
+app.listen(3000, () => {
+  console.log('Server for OVO App listening on port 3000!')
 });
