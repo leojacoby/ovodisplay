@@ -1,7 +1,7 @@
 {
-  "name": "react-node-starter",
+  "name": "ovo",
   "version": "1.0.0",
-  "description": "an example for deploying a React + NodeJS app to Heroku",
+  "description": "see and sort OVO in real time!",
   "main": "server.js",
   "scripts": {
     "build": "webpack --config webpack.prod.config.js",
@@ -10,6 +10,10 @@
     "backend": "nodemon server.js",
     "start": "npm run build && NODE_ENV=production node server.js",
     "test": "mocha --compilers js:babel-core/register ./test/**/*.js --require ignore-styles"
+  },
+  "repository" :
+  { "type" : "git",
+    "url" : "https://github.com/leojacoby/ovodisplay.git"
   },
   "author": "",
   "license": "ISC",
