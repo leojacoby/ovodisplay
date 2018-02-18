@@ -11,9 +11,9 @@
     "start": "npm run build && NODE_ENV=production node server.js",
     "test": "mocha --compilers js:babel-core/register ./test/**/*.js --require ignore-styles"
   },
-  "repository" :
-  { "type" : "git",
-    "url" : "https://github.com/leojacoby/ovodisplay.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/leojacoby/ovodisplay.git"
   },
   "author": "",
   "license": "ISC",

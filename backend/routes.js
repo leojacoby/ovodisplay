@@ -13,7 +13,6 @@ mongoose.connect(process.env.MONGODB_URI);
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  console.log('ovo coming right up!');
   Player.find()
     .sort({h: -1})
     .then(players => {
@@ -38,6 +37,7 @@ router.get('/', (req, res) => {
                           "hrRate": {'high': 0.0, 'low': 1.0},
                           "rbi": {'high': 0, 'low': 300} };
       players.forEach((player, index, playersArr) => {
+        console.log(player);
         // check for qualified hitters
         if (player.pa >= 150) {
           var newPlayer = Object.assign({}, player._doc);
