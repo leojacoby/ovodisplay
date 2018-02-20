@@ -14,7 +14,8 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
   Player.find()
-    .sort({h: -1})
+    .where('pa').gt(149)
+    .sort({pa: -1})
     .then(players => {
       // dummy weightings (add to 10)
       const weightings = {"obp": 3.0,
@@ -37,24 +38,36 @@ router.get('/', (req, res) => {
                           "hrRate": {'high': 0.0, 'low': 1.0},
                           "rbi": {'high': 0, 'low': 300} };
       players.forEach((player, index, playersArr) => {
-        console.log(player);
-        // check for qualified hitters
-        if (player.pa >= 150) {
-          var newPlayer = Object.assign({}, player._doc);
-
-          newPlayer.obp = (player.h + player.hbp + player.bb) / player.pa;
+        var newPlayer = Object.assign({}, player._doc);
+        // check for possible divide by zero
+        if (player.ab === 0) {
+          newPlayer.slg = 0.0;
+          newPlayer.ba = 0.0;
+        } else {
           newPlayer.slg = player.tb / player.ab;
+          newPlayer.ba = player.h / player.ab;
+        }
+
+        if (player.pa === 0) {
+          newPlayer.obp = 0.0;
+          newPlayer.soRate = 0.0;
+          newPlayer.bbRate = 0.0;
+          newPlayer.hrRate = 0.0;
+        } else {
+          newPlayer.obp = (player.h + player.hbp + player.bb) / player.pa;
           newPlayer.soRate = player.so / player.pa;
           newPlayer.bbRate = player.bb / player.pa;
-          if ((player.sb + player.cs) === 0) {
-            newPlayer.sbPct = 0.0;
-          } else {
-            newPlayer.sbPct = player.sb / (player.sb + player.cs);
-          }
-          newPlayer.ba = player.h / player.ab;
           newPlayer.hrRate = player.hr / player.pa;
-          playersArr[index] = newPlayer;
+        }
 
+        if ((player.sb + player.cs) === 0) {
+          newPlayer.sbPct = 0.0;
+        } else {
+          newPlayer.sbPct = player.sb / (player.sb + player.cs);
+        }
+        playersArr[index] = newPlayer;
+        // check for qualified hitters
+        if (player.pa >= 150) {
           Object.keys(highsAndLows).forEach(stat => {
             if (newPlayer[stat] > highsAndLows[stat].high) {
               highsAndLows[stat].high = newPlayer[stat];
@@ -72,6 +85,7 @@ router.get('/', (req, res) => {
           // turn stat into a number relative to league using high and low
           playerRelativeValues[stat] = (player[stat] - highsAndLows[stat].low) / (highsAndLows[stat].high - highsAndLows[stat].low);
         });
+        console.log(playerRelativeValues);
 
         var ovo = 0.0;
         Object.keys(playerRelativeValues).forEach(stat => {
@@ -79,26 +93,21 @@ router.get('/', (req, res) => {
         });
         const newPlayer = Object.assign({}, player);
 
-        newPlayer.ovo = ovo;
+        newPlayer.ovo = +(ovo.toFixed(2));
         newPlayers.push(newPlayer);
       });
-      res.json(newPlayers);
+      // sort by desc ovo
+      newPlayers.sort((a, b) => (b.ovo - a.ovo));
+      // rank each player by ovo after sorting
+      const sortedRankedPlayers = newPlayers.map((player, idx) => {
+        return Object.assign({rank: idx + 1}, player);
+      });
+      res.json(sortedRankedPlayers);
     })
     .catch(err => {
       console.log(err);
       res.send(err);
     });
 });
-
-// router.get('/', (req, res) => {
-//   Player.find()
-//     .sort({h: -1})
-//     .then(players => {
-//       res.json(players);
-//     })
-//     .catch(err => {
-//       res.send(err)
-//     })
-// })
 
 module.exports = router;

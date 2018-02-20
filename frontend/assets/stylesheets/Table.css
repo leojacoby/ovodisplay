@@ -1,0 +1,9 @@
+.ovo-table {
+  width: 50%;
+  background-color: #c0d9e5;
+}
+
+.react-bs-table-pagination {
+  position: fixed;
+  bottom: 0;
+}
