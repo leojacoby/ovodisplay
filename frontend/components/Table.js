@@ -55,10 +55,10 @@ class Table extends Component {
           {/* <TableHeaderColumn isKey dataField="_id">
             ID
           </TableHeaderColumn> */}
-          <TableHeaderColumn isKey dataField="rank" width="10%">
+          <TableHeaderColumn isKey dataField="rank" width="15%">
             Rank
           </TableHeaderColumn>
-          <TableHeaderColumn dataField="name" width="55%">
+          <TableHeaderColumn dataField="name" width="50%">
             Name
           </TableHeaderColumn>
           <TableHeaderColumn dataField="ovo" width="35%">

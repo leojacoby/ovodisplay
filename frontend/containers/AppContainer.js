@@ -3,48 +3,64 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import Table from '../components/Table';
 import axios from 'axios';
+import { newWeightings } from '../actions/index';
+
 // import './App.css';
 
 
 class AppContainer extends Component {
-    constructor() {
-      super();
-      this.state = {players: []};
-    }
-    componentWillMount() {
-      axios.get('http://localhost:3000/db')
-        .then(response => {
-          this.setState({players: response.data});
-        });
-    }
-    render() {
-      console.log(this.state.players[0]);
-      return (
-        <div>
-            <Table data={this.state.players}/>
-        </div>
-      );
-    }
+  constructor(props) {
+    super(props);
+    this.state = {players: []};
+  }
+  componentWillMount() {
+    axios.get('http://localhost:3000/db', {
+        params: {
+          weightings: this.props.weightings
+        }
+      })
+      .then(response => {
+        this.setState({players: response.data});
+      })
+      .catch(error => {
+        console.log("error", error);
+      });
+  }
+  render() {
+    console.log(this.state.players);
+    return (
+    <div>
+        <Table data={this.state.players}/>
+        {/* <WeightingEditor weightings={weightings} onChange/> */}
+    </div>
+    );
+  }
 }
 
-// AppContainer.propTypes = {
-//     name: PropTypes.string,
-// };
-//
-// const mapStateToProps = (state) => {
-//     return {
-//         name: state.name
-//     };
-// };
-//
-// const mapDispatchToProps = (/* dispatch */) => {
-//     return {
-//     };
-// };
+AppContainer.propTypes = {
+    weightings: PropTypes.object,
+    players: PropTypes.array,
+    onNewWeightings: PropTypes.func
+};
 
-// export default connect(
-//     mapStateToProps,
-//     mapDispatchToProps
-// )(AppContainer);
+const mapStateToProps = (state) => {
+    //console.log("state.weightings", state.weightings);
+    // console.log("state", state);
+    return {
+        weightings: state.weightings,
+        players: state.players
+    };
+};
 
-export default AppContainer;
+const mapDispatchToProps = (dispatch) => {
+    return {
+      onNewWeightings: (weightings) => dispatch(newWeightings(weightings))
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(AppContainer);
+
+// export default AppContainer;

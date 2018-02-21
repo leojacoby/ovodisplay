@@ -18,15 +18,7 @@ router.get('/', (req, res) => {
     .sort({pa: -1})
     .then(players => {
       // dummy weightings (add to 10)
-      const weightings = {"obp": 3.0,
-                          "slg": 3.0,
-                          "soRate": 0.7,
-                          "bbRate": 0.4,
-                          "sbPct": 0.5,
-                          "sb": 0.6,
-                          "ba": 0.7,
-                          "hrRate": 0.8,
-                          "rbi": 0.3 };
+      const weightings = JSON.parse(req.query.weightings);
 
       var highsAndLows = {"obp": {'high': 0.0, 'low': 1.0},
                           "slg": {'high': 0.0, 'low': 4.0},
@@ -85,12 +77,11 @@ router.get('/', (req, res) => {
           // turn stat into a number relative to league using high and low
           playerRelativeValues[stat] = (player[stat] - highsAndLows[stat].low) / (highsAndLows[stat].high - highsAndLows[stat].low);
         });
-        console.log(playerRelativeValues);
-
         var ovo = 0.0;
         Object.keys(playerRelativeValues).forEach(stat => {
           ovo = ovo + (playerRelativeValues[stat] * weightings[stat]);
         });
+
         const newPlayer = Object.assign({}, player);
 
         newPlayer.ovo = +(ovo.toFixed(2));

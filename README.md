@@ -1,4 +1,4 @@
-# React + Node Starter
+OVO display!
 _for [Heroku](https://www.heroku.com/) deployment_
 
 ## Overview
@@ -22,11 +22,10 @@ Once the server is running, you can visit `http://localhost:3000/`
 
 - **Frontend React**
     - The top level application Container is in `frontend/containers/AppContainer.js`
-    - CSS styles are in `frontend/assets/stylesheets/base.scss`
+    - CSS styles are in `frontend/assets/stylesheets`
 - **Backend Express**
     - Entry point is `server.js`
     - API routes are under `backend/routes.js`
-    - API routes are served under `http://localhost:3000/api`
 
 ## Production Build
 
