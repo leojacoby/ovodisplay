@@ -26,16 +26,20 @@ const dummyWeightings = {"obp": 0.0,
 // const Range = createSliderWithTooltip(Slider.Range);
 
 
-const WeightingEditor = ({weightings, onNewWeightings}) => {
-  console.log("weightings", weightings);
-  console.log("onNewWeightings", onNewWeightings);
-  return (
-    <div className="weighting-editor">
-      <Range min={0} max={100} defaultValue={10} />
-      <button className="btn-primary" onClick={() => onNewWeightings(dummyWeightings)}>submit</button>
-    </div>
-  );
-};
+class WeightingEditor extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+  render() {
+    return (
+      <div className="weighting-editor">
+        <Range min={0} max={100} defaultValue={10} />
+        <button className="btn-primary" onClick={() => this.props.onNewWeightings(dummyWeightings)}>submit</button>
+      </div>
+    );
+  }
+}
 
 WeightingEditor.propTypes = {
     weightings: PropTypes.object,
