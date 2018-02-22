@@ -1,12 +1,13 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import {BootstrapTable, TableHeaderColumn, SizePerPageDropDown} from 'react-bootstrap-table';
-import '../assets/stylesheets/Table.css';
+import '../assets/stylesheets/base.scss';
 import '../../node_modules/react-bootstrap-table/css/react-bootstrap-table.css';
 
 
 class Table extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     // this.onToggleDropDown = this.onToggleDropDown.bind(this);
     this.renderSizePerPageDropDown = this.renderSizePerPageDropDown.bind(this);
   }
@@ -46,11 +47,10 @@ class Table extends Component {
       lastPage: '⟹'
     };
     return (
-      <div>
+      <div className="data-table">
         <BootstrapTable ref="table"
                         data={this.props.data}
                         options={options}
-                        className="ovo-table"
                         striped hover pagination>
           {/* <TableHeaderColumn isKey dataField="_id">
             ID
@@ -69,5 +69,9 @@ class Table extends Component {
     );
   }
 }
+
+Table.propTypes = {
+    data: PropTypes.object,
+};
 
 export default Table;

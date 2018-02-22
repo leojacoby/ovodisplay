@@ -2,8 +2,11 @@ import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import Table from '../components/Table';
+import WeightingEditor from '../components/WeightingEditor';
 import axios from 'axios';
 import { newWeightings } from '../actions/index';
+import "../assets/stylesheets/base.scss";
+
 
 // import './App.css';
 
@@ -26,12 +29,24 @@ class AppContainer extends Component {
         console.log("error", error);
       });
   }
+  componentWillUpdate() {
+    axios.get('http://localhost:3000/db', {
+        params: {
+          weightings: this.props.weightings
+        }
+      })
+      .then(response => {
+        this.setState({players: response.data});
+      })
+      .catch(error => {
+        console.log("error", error);
+      });
+  }
   render() {
-    console.log(this.state.players);
     return (
-    <div>
-        <Table data={this.state.players}/>
-        {/* <WeightingEditor weightings={weightings} onChange/> */}
+    <div className={"main"}>
+        <Table /* className="data-table" */ data={this.state.players}/>
+        <WeightingEditor /* className={"weighting-editor"} */ />
     </div>
     );
   }
@@ -40,12 +55,9 @@ class AppContainer extends Component {
 AppContainer.propTypes = {
     weightings: PropTypes.object,
     players: PropTypes.array,
-    onNewWeightings: PropTypes.func
 };
 
 const mapStateToProps = (state) => {
-    //console.log("state.weightings", state.weightings);
-    // console.log("state", state);
     return {
         weightings: state.weightings,
         players: state.players

@@ -18,6 +18,7 @@ initialState.weightings = weightings;
 const rootReducer = (state = initialState, action) => {
   switch(action.type) {
     case ON_NEW_WEIGHTINGS:
+      console.log("action.weightings", action.weightings);
       return {weightings: action.weightings};
     default:
       return state;

@@ -1,0 +1,6 @@
+* fix soRate calculation because lower is better.
+* only calculate the highsAndLows the first time
+* make a fully functioning weighting control panel
+    * use slider components that become disabled once weightings add up to 100
+* wcp css
+* make table self-contained scrolling
