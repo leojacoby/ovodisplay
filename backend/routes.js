@@ -84,7 +84,7 @@ router.get('/', (req, res) => {
 
         const newPlayer = Object.assign({}, player);
 
-        newPlayer.ovo = +(ovo.toFixed(2));
+        newPlayer.ovo = +((ovo / 10).toFixed(2));
         newPlayers.push(newPlayer);
       });
       // sort by desc ovo
