@@ -36,13 +36,11 @@ class WeightingEditor extends Component {
   }
   onSliderChange(value, stat) {
     const prevValue = this.state.weightings[stat];
-    var newState = update(this.state, {
-      weightings: { obp: {$set: value} }
-    });
-    newState.budget = this.state.budget + (prevValue - value);
-    console.log(newState);
-    // this.state.weightings[stat] = value;
-    this.setState(newState);
+    var newStatWeighting = {};
+    newStatWeighting[stat] = value;
+    const adjustedWeightings = Object.assign(this.state.weightings, newStatWeighting);
+    // console.log(newStatWeighting);
+    this.setState({weightings: this.state.weightings, budget: this.state.budget + (prevValue - value)});
   }
   onSubmit() {
     if (this.state.budget === 0) {
@@ -56,28 +54,28 @@ class WeightingEditor extends Component {
         <Range disabledmin={0} max={100} onAfterChange={(value) => this.onSliderChange(value, "obp")} defaultValue={this.props.weightings.obp} />
         <br/>
         <label>SLG</label>
-        <Range disabledmin={0} max={100} defaultValue={this.props.weightings.slg} />
+        <Range disabledmin={0} max={100} onAfterChange={(value) => this.onSliderChange(value, "slg")} defaultValue={this.props.weightings.slg} />
         <br/>
         <label>SO Rate</label>
-        <Range disabledmin={0} max={100} defaultValue={this.props.weightings.soRate} />
+        <Range disabledmin={0} max={100} onAfterChange={(value) => this.onSliderChange(value, "soRate")} defaultValue={this.props.weightings.soRate} />
         <br/>
         <label>HR Rate</label>
-        <Range disabledmin={0} max={100} defaultValue={this.props.weightings.hrRate} />
+        <Range disabledmin={0} max={100} onAfterChange={(value) => this.onSliderChange(value, "hrRate")} defaultValue={this.props.weightings.hrRate} />
         <br/>
         <label>BB Rate</label>
-        <Range disabledmin={0} max={100} defaultValue={this.props.weightings.bbRate} />
+        <Range disabledmin={0} max={100} onAfterChange={(value) => this.onSliderChange(value, "bbRate")} defaultValue={this.props.weightings.bbRate} />
         <br/>
         <label>SB</label>
-        <Range disabledmin={0} max={100} defaultValue={this.props.weightings.sb} />
+        <Range disabledmin={0} max={100} onAfterChange={(value) => this.onSliderChange(value, "sb")} defaultValue={this.props.weightings.sb} />
         <br/>
         <label>SB%</label>
-        <Range disabledmin={0} max={100} defaultValue={this.props.weightings.sbPct} />
+        <Range disabledmin={0} max={100} onAfterChange={(value) => this.onSliderChange(value, "sbPct")} defaultValue={this.props.weightings.sbPct} />
         <br/>
         <label>BA</label>
-        <Range disabledmin={0} max={100} defaultValue={this.props.weightings.ba} />
+        <Range disabledmin={0} max={100} onAfterChange={(value) => this.onSliderChange(value, "ba")} defaultValue={this.props.weightings.ba} />
         <br/>
         <label>RBI</label>
-        <Range disabledmin={0} max={100} defaultValue={this.props.weightings.rbi} />
+        <Range disabledmin={0} max={100} onAfterChange={(value) => this.onSliderChange(value, "rbi")} defaultValue={this.props.weightings.rbi} />
         <br/>
         <label>Weighting points remaining: {this.state.budget}</label>
         <br/>

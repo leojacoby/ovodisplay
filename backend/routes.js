@@ -61,14 +61,26 @@ router.get('/', (req, res) => {
         // check for qualified hitters
         if (player.pa >= 150) {
           Object.keys(highsAndLows).forEach(stat => {
-            if (newPlayer[stat] > highsAndLows[stat].high) {
-              highsAndLows[stat].high = newPlayer[stat];
-            } else if (newPlayer[stat] < highsAndLows[stat].low) {
-              highsAndLows[stat].low = newPlayer[stat];
+            if (stat === "soRate") {
+              if (newPlayer.soRate > highsAndLows.soRate.low) {
+                highsAndLows.soRate.low = newPlayer.soRate;
+              } else if (newPlayer.soRate < highsAndLows.soRate.high) {
+                highsAndLows.soRate.high = newPlayer.soRate;
+              }
+            } else {
+              if (newPlayer[stat] > highsAndLows[stat].high) {
+                highsAndLows[stat].high = newPlayer[stat];
+              } else if (newPlayer[stat] < highsAndLows[stat].low) {
+                highsAndLows[stat].low = newPlayer[stat];
+              }
             }
           });
         }
+        // if (player.name === "Matt Joyce" || player.name === "Alex Avila" || player.name === "Bryce Harper") {
+        //   console.log(newPlayer);
+        // }
       });
+
 
       var newPlayers = [];
       players.forEach(player => {

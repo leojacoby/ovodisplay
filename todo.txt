@@ -1,6 +1,10 @@
 * fix soRate calculation because lower is better.
 * only calculate the highsAndLows the first time
 * make a fully functioning weighting control panel
-    * use slider components that become disabled once weightings add up to 100
-* wcp css
-* make table self-contained scrolling
+    * adjust weightings so they add up to 100
+    * auto updating table?
+* get 2017 stats!
+* don't rerender all the time (because of axios call)
+* why is matt joyce the best at bbRate?
+* get in control of when table adjusts (right now it's doing it 
+without dispatching because ofObject.assign state change i think)
