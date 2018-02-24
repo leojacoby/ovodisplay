@@ -30,7 +30,7 @@ const defaultWeightings = {"obp": 30,
 class WeightingEditor extends Component {
   constructor(props) {
     super(props);
-    this.state = {weightings: defaultWeightings};
+    this.state = {weightings: Object.assign({}, props.weightings)};
     // this.onSubmit = this.onSubmit.bind(this);
     this.onSliderChange = this.onSliderChange.bind(this);
     props.onNewWeightings(this.state.weightings);
@@ -43,19 +43,19 @@ class WeightingEditor extends Component {
     // console.log(newStatWeighting);
     // this.setState({weightings: adjustedWeightings, budget: this.state.budget + (prevValue - value)});
     console.log("weightings about to update");
-    // var weightSum = 0;
-    // Object.keys(adjustedWeightings).forEach(statKey => {
-    //   weightSum = weightSum + adjustedWeightings[statKey];
-    // });
-    // const weightFactor = 100 / weightSum;
-    // var proportionalWeightings = {};
-    // Object.keys(adjustedWeightings).forEach(statKey => {
-    //   proportionalWeightings[statKey] = adjustedWeightings[statKey] * weightFactor;
-    // });
-    // console.log("adjustedWeightings", adjustedWeightings);
-    // console.log("proportionalWeightings", proportionalWeightings);
-    // console.log("weightFactor", weightFactor);
-    this.props.onNewWeightings(adjustedWeightings/* proportionalWeightings */);
+    var weightSum = 0;
+    Object.keys(adjustedWeightings).forEach(statKey => {
+      weightSum = weightSum + adjustedWeightings[statKey];
+    });
+    const weightFactor = 100 / weightSum;
+    var proportionalWeightings = {};
+    Object.keys(adjustedWeightings).forEach(statKey => {
+      proportionalWeightings[statKey] = Math.round(adjustedWeightings[statKey] * weightFactor);
+    });
+    console.log("adjustedWeightings", adjustedWeightings);
+    console.log("proportionalWeightings", proportionalWeightings);
+    console.log("weightFactor", weightFactor);
+    this.props.onNewWeightings(proportionalWeightings);
   }
   render() {
     console.log("Weighting editor rendering...");
@@ -96,12 +96,13 @@ class WeightingEditor extends Component {
 }
 
 WeightingEditor.propTypes = {
-    onNewWeightings: PropTypes.func
+  weightings: PropTypes.object,
+  onNewWeightings: PropTypes.func
 };
 
-const mapStateToProps = (/* state */) => {
+const mapStateToProps = (state) => {
     return {
-        // weightings: state.weightings
+        weightings: state.weightings
     };
 };
 

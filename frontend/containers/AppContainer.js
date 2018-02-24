@@ -16,7 +16,7 @@ class AppContainer extends Component {
     super(props);
   }
   render() {
-    console.log("app container rendering", this.props.weightings);
+    console.log("app container rendering");
     return (
         <div className={"main"}>
             <Table /* className="data-table" */ /* weightings={this.props.weightings}*/ />
@@ -26,25 +26,27 @@ class AppContainer extends Component {
   }
 }
 
-AppContainer.propTypes = {
-    weightings: PropTypes.object,
-};
+// AppContainer.propTypes = {
+//     weightings: PropTypes.object,
+// };
 
-const mapStateToProps = (state) => {
-    return {
-        weightings: state.weightings
-    };
-};
+// const mapStateToProps = (state) => {
+//     return {
+//         weightings: state.weightings
+//     };
+// };
+//
+// const mapDispatchToProps = (/* dispatch */) => {
+//     return {
+//       // onNewWeightings: (weightings) => dispatch(newWeightings(weightings))
+//     };
+// };
 
-const mapDispatchToProps = (/* dispatch */) => {
-    return {
-      // onNewWeightings: (weightings) => dispatch(newWeightings(weightings))
-    };
-};
+export default AppContainer;
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(AppContainer);
+// export default connect(
+//     mapStateToProps,
+//     mapDispatchToProps
+// )(AppContainer);
 
 // export default AppContainer;
