@@ -1,6 +1,7 @@
 * only calculate the highsAndLows the first time
 * make a fully functioning weighting control panel
     * adjust weightings so they add up to 100
+    * make default weightings only in one spot (reducer or constructor)
 * get 2017 stats!
 * why is matt joyce the best at bbRate?
 * clean up lifecylce in Table.js
