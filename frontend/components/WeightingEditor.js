@@ -40,7 +40,9 @@ class WeightingEditor extends Component {
     newStatWeighting[stat] = value;
     const adjustedWeightings = Object.assign(this.state.weightings, newStatWeighting);
     // console.log(newStatWeighting);
-    this.setState({weightings: this.state.weightings, budget: this.state.budget + (prevValue - value)});
+    // this.setState({weightings: adjustedWeightings, budget: this.state.budget + (prevValue - value)});
+    console.log("weightings about to update");
+    this.props.onNewWeightings(adjustedWeightings);
   }
   onSubmit() {
     if (this.state.budget === 0) {
@@ -48,6 +50,7 @@ class WeightingEditor extends Component {
     }
   }
   render() {
+    console.log("Weighting editor rendering...");
     return (
       <div className="weighting-editor">
         <label>OBP</label>

@@ -27,6 +27,7 @@
     "enzyme": "^2.8.1",
     "expect": "^1.20.2",
     "express": "^4.15.2",
+    "immutability-helper": "^2.6.5",
     "mocha": "^3.2.0",
     "node-sass": "^4.5.2",
     "prop-types": "^15.6.0",

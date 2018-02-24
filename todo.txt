@@ -6,5 +6,5 @@
 * get 2017 stats!
 * don't rerender all the time (because of axios call)
 * why is matt joyce the best at bbRate?
-* get in control of when table adjusts (right now it's doing it 
-without dispatching because ofObject.assign state change i think)
+* get in control of when table adjusts (right now it's doing it
+without dispatching because of Object.assign state change i think)
