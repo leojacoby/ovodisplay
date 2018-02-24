@@ -26,7 +26,7 @@ class Table extends Component {
         }
       })
       .then(response => {
-        this.setState({players: response.data, shouldUpdate: true}, () => {
+        this.setState({players: response.data}, () => {
           console.log('state set', this.state.players);
           this.players = true;
         });
@@ -45,28 +45,23 @@ class Table extends Component {
   }
   shouldComponentUpdate(nextProps, nextState) {
     console.log("***shouldComponentUpdate");
-    console.log("this.players", this.players);
     console.log("old weight", this.weightings);
     console.log("new weight", nextProps.weightings);
-    console.log("old weight keys", Object.keys(this.weightings));
     // if this.players is false ==> update
     if (!this.players) {
-      console.log("we need players! updating...");
       return true;
     }
     // if old and new weights are difference ==> update
     var returnValue = false;
     Object.keys(this.weightings).forEach(stat => {
       if (this.weightings[stat] !== nextProps.weightings[stat]) {
-        // this.weightings = nextProps.weightings;
         returnValue = true;
       }
-      console.log("old", stat, this.weightings[stat]);
-      console.log("new", stat, nextProps.weightings[stat]);
     });
     // else ==> nah
     if (returnValue) {
       console.log("weightings don't match: updating...");
+      this.players = false;
     } else {
       console.log("not today bud");
     }
@@ -80,7 +75,10 @@ class Table extends Component {
         }
       })
       .then(response => {
-        this.setState({players: response.data, shouldUpdate: false});
+        this.setState({players: response.data}, () => {
+          console.log('updated state set', this.state.players);
+          this.players = true;
+        });
       })
       .catch(error => {
         console.log("error", error);
@@ -88,6 +86,7 @@ class Table extends Component {
   }
   componentDidUpdate() {
     console.log("***component did update");
+    this.weightings = Object.assign({}, this.props.weightings);
   }
   renderSizePerPageDropDown(props) {
     return (
@@ -149,7 +148,6 @@ Table.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-    console.log("mapping state to props");
     return {
         weightings: state.weightings
     };
