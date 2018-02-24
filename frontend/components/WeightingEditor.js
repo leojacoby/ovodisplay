@@ -13,15 +13,15 @@ import '../assets/stylesheets/base.scss';
 import 'rc-slider/assets/index.css';
 import 'rc-tooltip/assets/bootstrap.css';
 
-const dummyWeightings = {"obp": 0.0,
-                    "slg": 0.6,
-                    "soRate": 0.0,
-                    "bbRate": 0.2,
-                    "sbPct": 0.5,
-                    "sb": 7.5,
-                    "ba": 0.7,
-                    "hrRate": 0.2,
-                    "rbi": 0.3 };
+const defaultWeightings = {"obp": 30,
+                    "slg": 30,
+                    "soRate": 7,
+                    "bbRate": 4,
+                    "sbPct": 5,
+                    "sb": 6,
+                    "ba": 7,
+                    "hrRate": 8,
+                    "rbi": 3 };
 
 // const createSliderWithTooltip = Slider.createSliderWithTooltip;
 // const Range = createSliderWithTooltip(Slider.Range);
@@ -30,24 +30,31 @@ const dummyWeightings = {"obp": 0.0,
 class WeightingEditor extends Component {
   constructor(props) {
     super(props);
-    this.state = {weightings: props.weightings, budget: 0};
-    this.onSubmit = this.onSubmit.bind(this);
+    // this.state = {weightings: defaultWeightings, budget: 0};
+    // this.onSubmit = this.onSubmit.bind(this);
     this.onSliderChange = this.onSliderChange.bind(this);
   }
   onSliderChange(value, stat) {
-    const prevValue = this.state.weightings[stat];
+    // const prevValue = this.state.weightings[stat];
     var newStatWeighting = {};
     newStatWeighting[stat] = value;
-    const adjustedWeightings = Object.assign(this.state.weightings, newStatWeighting);
+    const adjustedWeightings = Object.assign(this.props.weightings, newStatWeighting);
     // console.log(newStatWeighting);
     // this.setState({weightings: adjustedWeightings, budget: this.state.budget + (prevValue - value)});
     console.log("weightings about to update");
-    this.props.onNewWeightings(adjustedWeightings);
-  }
-  onSubmit() {
-    if (this.state.budget === 0) {
-      this.props.onNewWeightings(this.state.weightings);
-    }
+    // var weightSum = 0;
+    // Object.keys(adjustedWeightings).forEach(statKey => {
+    //   weightSum = weightSum + adjustedWeightings[statKey];
+    // });
+    // const weightFactor = 100 / weightSum;
+    // var proportionalWeightings = {};
+    // Object.keys(adjustedWeightings).forEach(statKey => {
+    //   proportionalWeightings[statKey] = adjustedWeightings[statKey] * weightFactor;
+    // });
+    // console.log("adjustedWeightings", adjustedWeightings);
+    // console.log("proportionalWeightings", proportionalWeightings);
+    // console.log("weightFactor", weightFactor);
+    this.props.onNewWeightings(adjustedWeightings/* proportionalWeightings */);
   }
   render() {
     console.log("Weighting editor rendering...");
@@ -80,9 +87,8 @@ class WeightingEditor extends Component {
         <label>RBI</label>
         <Range disabledmin={0} max={100} onAfterChange={(value) => this.onSliderChange(value, "rbi")} defaultValue={this.props.weightings.rbi} />
         <br/>
-        <label>Weighting points remaining: {this.state.budget}</label>
+        {/* <label>Weighting points remaining: {this.state.budget}</label> */}
         <br/>
-        <button className="btn-primary" onClick={this.onSubmit}>submit</button>
       </div>
     );
   }

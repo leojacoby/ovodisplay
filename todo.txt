@@ -1,10 +1,6 @@
-* fix soRate calculation because lower is better.
 * only calculate the highsAndLows the first time
 * make a fully functioning weighting control panel
     * adjust weightings so they add up to 100
-    * auto updating table?
 * get 2017 stats!
-* don't rerender all the time (because of axios call)
 * why is matt joyce the best at bbRate?
-* get in control of when table adjusts (right now it's doing it
-without dispatching because of Object.assign state change i think)
+* clean up lifecylce in Table.js

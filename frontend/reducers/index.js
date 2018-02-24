@@ -3,7 +3,7 @@ import {ON_NEW_WEIGHTINGS} from '../actions/types';
 
 var initialState = {};
 
-const weightings = {"obp": 30,
+const defaultWeightings = {"obp": 30,
                     "slg": 30,
                     "soRate": 7,
                     "bbRate": 4,
@@ -13,7 +13,7 @@ const weightings = {"obp": 30,
                     "hrRate": 8,
                     "rbi": 3 };
 
-initialState.weightings = weightings;
+initialState.weightings = defaultWeightings;
 
 const rootReducer = (state = initialState, action) => {
   switch(action.type) {
