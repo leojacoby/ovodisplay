@@ -18,23 +18,23 @@ class Table extends Component {
     // this.onToggleDropDown = this.onToggleDropDown.bind(this);
     this.renderSizePerPageDropDown = this.renderSizePerPageDropDown.bind(this);
   }
-  componentWillMount() {
-    console.log("***component will mount");
-    axios.get('http://localhost:3000/db', {
-        params: {
-          weightings: this.props.weightings
-        }
-      })
-      .then(response => {
-        this.setState({players: response.data}, () => {
-          console.log('state set', this.state.players);
-          // this.players = true;
-        });
-      })
-      .catch(error => {
-        console.log("error", error);
-      });
-  }
+  // componentWillMount() {
+  //   console.log("***component will mount");
+  //   axios.get('http://localhost:3000/db', {
+  //       params: {
+  //         weightings: this.props.weightings
+  //       }
+  //     })
+  //     .then(response => {
+  //       this.setState({players: response.data}, () => {
+  //         console.log('state set', this.state.players);
+  //         // this.players = true;
+  //       });
+  //     })
+  //     .catch(error => {
+  //       console.log("error", error);
+  //     });
+  // }
   // componentDidMount() {
   //   console.log('***component did mount');
   // }
