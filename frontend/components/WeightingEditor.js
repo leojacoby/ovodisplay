@@ -42,7 +42,7 @@ class WeightingEditor extends Component {
     const adjustedWeightings = Object.assign(this.state.weightings, newStatWeighting);
     // console.log(newStatWeighting);
     // this.setState({weightings: adjustedWeightings, budget: this.state.budget + (prevValue - value)});
-    console.log("weightings about to update");
+    // console.log("weightings about to update");
     var weightSum = 0;
     Object.keys(adjustedWeightings).forEach(statKey => {
       weightSum = weightSum + adjustedWeightings[statKey];
@@ -52,9 +52,9 @@ class WeightingEditor extends Component {
     Object.keys(adjustedWeightings).forEach(statKey => {
       proportionalWeightings[statKey] = Math.round(adjustedWeightings[statKey] * weightFactor);
     });
-    console.log("adjustedWeightings", adjustedWeightings);
-    console.log("proportionalWeightings", proportionalWeightings);
-    console.log("weightFactor", weightFactor);
+    // console.log("adjustedWeightings", adjustedWeightings);
+    // console.log("proportionalWeightings", proportionalWeightings);
+    // console.log("weightFactor", weightFactor);
     this.props.onNewWeightings(proportionalWeightings);
   }
   render() {
