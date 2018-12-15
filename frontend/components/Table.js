@@ -10,36 +10,12 @@ import '../../node_modules/react-bootstrap-table/css/react-bootstrap-table.css';
 
 class Table extends Component {
   constructor(props) {
-    console.log("***constructor");
     super(props);
     this.state = {players: []};
-    // this.weightings = Object.assign({}, props.weightings);
-    // this.players = false;
-    // this.onToggleDropDown = this.onToggleDropDown.bind(this);
     this.renderSizePerPageDropDown = this.renderSizePerPageDropDown.bind(this);
   }
-  // componentWillMount() {
-  //   console.log("***component will mount");
-  //   axios.get('http://localhost:3000/db', {
-  //       params: {
-  //         weightings: this.props.weightings
-  //       }
-  //     })
-  //     .then(response => {
-  //       this.setState({players: response.data}, () => {
-  //         console.log('state set', this.state.players);
-  //         // this.players = true;
-  //       });
-  //     })
-  //     .catch(error => {
-  //       console.log("error", error);
-  //     });
-  // }
-  // componentDidMount() {
-  //   console.log('***component did mount');
-  // }
   componentWillReceiveProps(nextProps) {
-    console.log("***componentWillReceiveProps", nextProps);
+    console.log('will receive props');
     axios.get('http://localhost:3000/db', {
         params: {
           weightings: nextProps.weightings
@@ -47,61 +23,13 @@ class Table extends Component {
       })
       .then(response => {
         this.setState({players: response.data}, () => {
-          console.log('updated state set', this.state.players);
-          // this.players = true;
+          console.log('players received');
         });
       })
       .catch(error => {
         console.log("error", error);
       });
-    // this.setState({shouldUpdate: true});
-    // console.log("props recieved and state set", this.state.shouldUpdate);
   }
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   console.log("***shouldComponentUpdate");
-  //   console.log("old weight", this.weightings);
-  //   console.log("new weight", nextProps.weightings);
-  //   // if this.players is false ==> update
-  //   if (!this.players) {
-  //     return true;
-  //   }
-  //   // if old and new weights are difference ==> update
-  //   var returnValue = false;
-  //   Object.keys(this.weightings).forEach(stat => {
-  //     if (this.weightings[stat] !== nextProps.weightings[stat]) {
-  //       returnValue = true;
-  //     }
-  //   });
-  //   // else ==> nah
-  //   if (returnValue) {
-  //     console.log("weightings don't match: updating...");
-  //     this.players = false;
-  //   } else {
-  //     console.log("decided not to update");
-  //   }
-  //   return returnValue;
-  // }
-  // componentWillUpdate() {
-  //   console.log("***component will update");
-  //   axios.get('http://localhost:3000/db', {
-  //       params: {
-  //         weightings: this.props.weightings
-  //       }
-  //     })
-  //     .then(response => {
-  //       this.setState({players: response.data}, () => {
-  //         console.log('updated state set', this.state.players);
-  //         this.players = true;
-  //       });
-  //     })
-  //     .catch(error => {
-  //       console.log("error", error);
-  //     });
-  // }
-  // componentDidUpdate() {
-  //   console.log("***component did update");
-  //   this.weightings = Object.assign({}, this.props.weightings);
-  // }
   renderSizePerPageDropDown(props) {
     return (
       <div className="btn-group pagination">
@@ -132,7 +60,6 @@ class Table extends Component {
       firstPage: '⟸',
       lastPage: '⟹'
     };
-    console.log("***rendering...");
     return (
       <div className="data-table">
         <BootstrapTable ref="table"

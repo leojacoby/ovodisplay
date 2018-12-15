@@ -2,9 +2,19 @@ const path = require('path');
 const express = require('express');
 const routes = require('./backend/routes');
 const bodyParser = require('body-parser');
-const app = express();
+const mongoose = require('mongoose');
 
-console.log('get served!');
+mongoose.connection.on('connected', () => {
+  console.log('Connected to MongoDB');
+});
+
+mongoose.connection.on('error', () => {
+  console.log('Failed connection to MongoDB');
+});
+
+mongoose.connect(process.env.MONGODB_URI);
+
+const app = express();
 
 // This line makes the build folder publicly available.
 app.use(express.static(path.join(__dirname, 'public')));
@@ -17,5 +27,5 @@ app.use(bodyParser.json());
 app.use('/db', routes);
 
 app.listen(3000, () => {
-  console.log('Server for OVO App listening on port 3000!')
+  console.log('Server for OVO App listening on port 3000!');
 });

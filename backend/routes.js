@@ -6,8 +6,6 @@ mongoose.connection.on('connected', () => {
   console.log('Connected to MongoDB');
 });
 
-console.log('route guidance commencing!');
-
 mongoose.connect(process.env.MONGODB_URI);
 
 const router = express.Router();
@@ -17,6 +15,7 @@ router.get('/', (req, res) => {
     .where('pa').gt(149)
     .sort({pa: -1})
     .then(players => {
+      console.log('get /', players.length);
       // dummy weightings (add to 10)
       const weightings = JSON.parse(req.query.weightings);
 

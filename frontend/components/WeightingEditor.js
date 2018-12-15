@@ -1,31 +1,14 @@
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import update from 'react-addons-update';
 import { newWeightings } from '../actions/index';
 import Slider from 'rc-slider';
 const createSliderWithTooltip = Slider.createSliderWithTooltip;
 const Range = createSliderWithTooltip(Slider);
 
-// import handle from './Handle';
-// import Tooltip from 'rc-tooltip';
 import '../assets/stylesheets/base.scss';
 import 'rc-slider/assets/index.css';
 import 'rc-tooltip/assets/bootstrap.css';
-
-const defaultWeightings = {"obp": 30,
-                    "slg": 30,
-                    "soRate": 7,
-                    "bbRate": 4,
-                    "sbPct": 5,
-                    "sb": 6,
-                    "ba": 7,
-                    "hrRate": 8,
-                    "rbi": 3 };
-
-// const createSliderWithTooltip = Slider.createSliderWithTooltip;
-// const Range = createSliderWithTooltip(Slider.Range);
-
 
 class WeightingEditor extends Component {
   constructor(props) {
