@@ -29,6 +29,7 @@
     "express": "^4.15.2",
     "immutability-helper": "^2.6.5",
     "mocha": "^3.2.0",
+    "mongoose": "^5.4.0",
     "node-sass": "^4.5.2",
     "prop-types": "^15.6.0",
     "rc-slider": "^8.6.0",
