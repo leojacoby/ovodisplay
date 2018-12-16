@@ -16,7 +16,7 @@ class Table extends Component {
   }
   componentWillReceiveProps(nextProps) {
     console.log('will receive props');
-    axios.get('http://localhost:3000/db', {
+    axios.get('https://ovo-interactive.herokuapp.com/db', {
         params: {
           weightings: nextProps.weightings
         }
