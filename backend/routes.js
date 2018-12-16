@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
 
       var highsAndLows = {"obp": {'high': 0.0, 'low': 1.0},
                           "slg": {'high': 0.0, 'low': 4.0},
-                          "soRate": {'high': 0.0, 'low': 1.0},
+                          "soRate": {'high': 1.0, 'low': 0.0},
                           "bbRate": {'high': 0.0, 'low': 1.0},
                           "sbPct": {'high': 0.0, 'low': 1.0},
                           "sb": {'high': 0, 'low': 200},
