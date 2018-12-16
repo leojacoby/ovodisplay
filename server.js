@@ -29,5 +29,5 @@ app.use(bodyParser.json());
 app.use('/db', routes);
 
 app.listen(port, () => {
-  console.log(`Server for OVO App listening on port ${port}!`);
+  console.log(`Server for OVO App listening on port ${port}!!`);
 });
