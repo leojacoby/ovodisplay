@@ -3,6 +3,8 @@ const express = require('express');
 const routes = require('./backend/routes');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const port = process.env.PORT || 3000;
+
 
 mongoose.connection.on('connected', () => {
   console.log('Connected to MongoDB');
@@ -26,8 +28,6 @@ app.get('/', (request, response) => {
 app.use(bodyParser.json());
 app.use('/db', routes);
 
-const port = process.env.PORT || 3000;
-
 app.listen(port, () => {
-  console.log('Server for OVO App listening on port 3000!');
+  console.log(`Server for OVO App listening on port ${port}!`);
 });
