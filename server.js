@@ -26,6 +26,8 @@ app.get('/', (request, response) => {
 app.use(bodyParser.json());
 app.use('/db', routes);
 
-app.listen(3000, () => {
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => {
   console.log('Server for OVO App listening on port 3000!');
 });
