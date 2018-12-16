@@ -11,6 +11,10 @@
     "start": "NODE_ENV=production node server.js",
     "test": "mocha --compilers js:babel-core/register ./test/**/*.js --require ignore-styles"
   },
+  "engines": {
+    "node": "6.11.0",
+    "npm": "5.0.3"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/leojacoby/ovo.git"
