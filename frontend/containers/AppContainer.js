@@ -19,6 +19,7 @@ class AppContainer extends Component {
     console.log("app container rendering");
     return (
         <div className={"main"}>
+            <p>Saw</p>
             <Table /* className="data-table" */ /* weightings={this.props.weightings}*/ />
             <WeightingEditor /* className={"weighting-editor"} */ />
         </div>
